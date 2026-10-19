@@ -3,4 +3,8 @@ dist/
 .astro/
 .env
 .env.*
+*.pem
+*.key
+*.pfx
+*.p12
 *.log
