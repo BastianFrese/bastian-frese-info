@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Labor — Bastian Frese</title>
+<meta name="description" content="Ein privat betriebenes Labor: drei Hypervisor-Knoten, vierzig Gäste, ein Netz ohne offene Ports. Betriebsbuch statt Portfolio.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b6b4f'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' fill='%23f2efe7' text-anchor='middle'%3Ebf%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt</a>
+
+<header class="masthead">
+  <a class="mark" href="#top" aria-label="Zum Anfang">bf<span>·</span>labor</a>
+  <nav aria-label="Abschnitte">
+    <a href="#betrieb">Betrieb</a>
+    <a href="#weg">Weg</a>
+    <a href="#wachen">Wachen</a>
+    <a href="#netz">Netz</a>
+    <a href="#projekte">Projekte</a>
+  </nav>
+  <span class="masthead-note">bastian-frese.info</span>
+</header>
+
+<main id="main">
+
+  <section class="hero" id="top">
+    <p class="kicker">Betriebsbuch · Stand 19. Oktober 2026</p>
+    <h1>Ein Labor,<br>das läuft.</h1>
+    <p class="lede">Keine Demo und keine Cloud: drei Hypervisor-Knoten im eigenen Regal,
+      vierzig Gäste, ein Netz. Diese Seite beschreibt, was dort läuft, wie es hereinkommt
+      und was passiert, wenn etwas ausfällt.</p>
+    <dl class="figures">
+      <div><dt>Knoten</dt><dd>3</dd></div>
+      <div><dt>Gäste im Bestand</dt><dd>40</dd></div>
+      <div><dt>davon in Betrieb</dt><dd>35</dd></div>
+      <div><dt>offene Ports</dt><dd>0</dd></div>
+    </dl>
+    <p class="figures-note">Gezählt am 16.10.2026 über die Cluster-API: 30 Container, 10 virtuelle
+      Maschinen. Maßgeblich ist, was läuft — deshalb 35 und nicht 40.</p>
+  </section>
+
+  <section class="chapter" id="betrieb">
+    <div class="chapter-meta">
+      <span class="chapter-no">01</span>
+      <span class="chapter-label">Betrieb</span>
+    </div>
+    <div class="chapter-body">
+      <h2>Was hier läuft</h2>
+      <p>Ein flaches Netz, ein Eintrittspunkt, viele Dienste. Die Liste ist keine Sammlung
+        von Installationen, sondern der Bestand, der täglich gebraucht wird.</p>
+
+      <ul class="services">
+        <li>
+          <span class="svc-name">AdGuard Home</span>
+          <span class="svc-role">DNS und DHCP für das gesamte Netz — inklusive fester Adressen und lokaler Namen.</span>
+          <span class="svc-state">läuft</span>
+        </li>
+        <li>
+          <span class="svc-name">Nginx Proxy Manager</span>
+          <span class="svc-role">Eintrittspunkt für alle Dienste. Entscheidet anhand des Hostnamens, wohin ein Request geht.</span>
+          <span class="svc-state">läuft</span>
+        </li>
+        <li>
+          <span class="svc-name">Cloudflare Tunnel</span>
+          <span class="svc-role">Öffentlicher Zugang ohne Portfreigabe am Router. Vier Verbindungen, ausgehend aufgebaut.</span>
+          <span class="svc-state">läuft</span>
+        </li>
+        <li>
+          <span class="svc-name">Authelia</span>
+          <span class="svc-role">Zentrale Anmeldung mit zweitem Faktor vor den Verwaltungsdiensten.</span>
+          <span class="svc-state">läuft</span>
+        </li>
+        <li>
+          <span class="svc-name">Grafana · Prometheus · Loki</span>
+          <span class="svc-role">Metriken, Logs und Alarmierung. Meldet, bevor ein Nutzer den Ausfall bemerkt.</span>
+          <span class="svc-state">läuft</span>
+        </li>
+        <li>
+          <span class="svc-name">Healthchecks</span>
+          <span class="svc-role">Prüft, ob geplante Aufgaben tatsächlich ausgeführt wurden — nicht nur, ob der Dienst antwortet.</span>
+          <span class="svc-state">läuft</span>
+        </li>
+        <li>
+          <span class="svc-name">Uptime Kuma · Gatus</span>
+          <span class="svc-role">Verfügbarkeit von innen und von außen. Zwei Blickwinkel, damit ein Fehler nicht nur an einer Stelle sichtbar wird.</span>
+          <span class="svc-state">läuft</span>
+        </li>
+        <li>
+          <span class="svc-name">Vaultwarden</span>
+          <span class="svc-role">Passwort-Tresor auf eigener Hardware, nicht bei einem Anbieter.</span>
+          <span class="svc-state">läuft</span>
+        </li>
+        <li>
+          <span class="svc-name">Nextcloud</span>
+          <span class="svc-role">Dateien und Freigaben, selbst gehostet.</span>
+          <span class="svc-state">läuft</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="chapter" id="weg">
+    <div class="chapter-meta">
+      <span class="chapter-no">02</span>
+      <span class="chapter-label">Weg</span>
+    </div>
+    <div class="chapter-body">
+      <h2>Der Weg von außen</h2>
+      <p>Nichts aus dem Netz ist direkt aus dem Internet erreichbar. Der öffentliche Verkehr
+        kommt über einen Tunnel herein, der von innen aufgebaut wird. Am Router sind die
+        Ports 80 und 443 geschlossen.</p>
+
+      <figure class="diagram">
+        <svg viewBox="0 40 760 155" role="img" aria-labelledby="diagram-title diagram-desc">
+          <title id="diagram-title">Der Weg eines Requests von außen in das Labor</title>
+          <desc id="diagram-desc">Vom Browser über Cloudflare und den Tunnel zum Reverse Proxy
+            und von dort zu den Diensten. Der Tunnel wird von innen aufgebaut; am Router ist
+            kein Port offen.</desc>
+          <g class="d-box">
+            <rect x="8" y="62" width="140" height="72" rx="2"/>
+            <text x="78" y="94" text-anchor="middle">Browser</text>
+            <text x="78" y="113" text-anchor="middle" class="d-small">irgendwo</text>
+          </g>
+          <g class="d-box">
+            <rect x="196" y="62" width="150" height="72" rx="2"/>
+            <text x="271" y="94" text-anchor="middle">Cloudflare</text>
+            <text x="271" y="113" text-anchor="middle" class="d-small">TLS endet hier</text>
+          </g>
+          <g class="d-box d-accent">
+            <rect x="394" y="62" width="150" height="72" rx="2"/>
+            <text x="469" y="94" text-anchor="middle">Tunnel</text>
+            <text x="469" y="113" text-anchor="middle" class="d-small">ausgehend aufgebaut</text>
+          </g>
+          <g class="d-box">
+            <rect x="592" y="62" width="160" height="72" rx="2"/>
+            <text x="672" y="88" text-anchor="middle">Proxy</text>
+            <text x="672" y="107" text-anchor="middle" class="d-small">wählt den Dienst</text>
+            <text x="672" y="122" text-anchor="middle" class="d-small">nach Hostname</text>
+          </g>
+          <line class="d-line" x1="148" y1="98" x2="192" y2="98"/>
+          <line class="d-line" x1="346" y1="98" x2="390" y2="98"/>
+          <line class="d-line" x1="544" y1="98" x2="588" y2="98"/>
+          <path class="d-line" d="M592 160 H672 V138"/>
+          <text x="672" y="180" text-anchor="middle" class="d-small">Router: 80/443 zu</text>
+        </svg>
+        <ol class="flow-alt">
+          <li><strong>Browser</strong><span>irgendwo im Internet</span></li>
+          <li><strong>Cloudflare</strong><span>TLS endet hier</span></li>
+          <li><strong>Tunnel</strong><span>von innen aufgebaut</span></li>
+          <li><strong>Proxy</strong><span>wählt den Dienst nach Hostname</span></li>
+          <li><strong>Router</strong><span>Ports 80 und 443 geschlossen</span></li>
+        </ol>
+        <figcaption>Ein Request kommt an, ohne dass am Router ein Port geöffnet ist. Der
+          Tunnel hält die Verbindung von innen.</figcaption>
+      </figure>
+
+      <p class="note">Die Client-Adresse wird aus <code>CF-Connecting-IP</code> gelesen, nicht
+        aus <code>X-Forwarded-For</code> — der zweite Kopf ist vom Absender frei setzbar und
+        damit für Zugriffsregeln wertlos.</p>
+    </div>
+  </section>
+
+  <section class="chapter" id="wachen">
+    <div class="chapter-meta">
+      <span class="chapter-no">03</span>
+      <span class="chapter-label">Wachen</span>
+    </div>
+    <div class="chapter-body">
+      <h2>Was aufpasst</h2>
+      <p>Ein Dienst, der läuft, ist noch kein Beweis. Deshalb gibt es drei Ebenen: Messen,
+        Prüfen, Sichern.</p>
+
+      <dl class="ledger">
+        <div>
+          <dt>Messen</dt>
+          <dd>Grafana, Prometheus und Loki sammeln Metriken und Logs. Alarme gehen über einen
+            eigenen Push-Dienst aufs Handy — ohne fremden Anbieter.</dd>
+        </div>
+        <div>
+          <dt>Prüfen</dt>
+          <dd>Ein eigener Dienst wartet auf Meldungen geplanter Aufgaben. Bleibt eine Meldung
+            aus, ist die Aufgabe nicht gelaufen — auch wenn der Server gesund aussieht.</dd>
+        </div>
+        <div>
+          <dt>Sichern</dt>
+          <dd>Täglich automatisch: Konfiguration aller Systeme und Datenbank-Abzüge, mehrere
+            Stände, an zwei voneinander getrennte Ziele.</dd>
+        </div>
+      </dl>
+
+      <aside class="case">
+        <p class="case-label">Ein Fund, der zählt</p>
+        <p>Die Datensicherung meldete Erfolg und lief leer. Ursache war ein Skript, das ohne
+          den nötigen Suchpfad gestartet wurde — es fand das Werkzeug nicht und brach still ab.
+          Aufgefallen ist es nicht durch einen Alarm, sondern durch die Prüfung, ob geplante
+          Aufgaben wirklich gelaufen sind. Nach dem Beheben: <strong>32 Kilobyte vorher,
+          109 Megabyte nachher.</strong></p>
+        <p class="case-moral">Ein Schutz, der nicht greift, ist gefährlicher als gar keiner.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="chapter" id="netz">
+    <div class="chapter-meta">
+      <span class="chapter-no">04</span>
+      <span class="chapter-label">Netz</span>
+    </div>
+    <div class="chapter-body">
+      <h2>Zonen statt Vertrauen</h2>
+      <p>Das Netz war vollständig flach: jedes System erreichte jedes andere. Gefunden wurde
+        das nicht durch einen Ausfall, sondern durch das Auslesen der Cluster-Konfiguration.
+        Daraus entstand ein Zonenplan.</p>
+
+      <ul class="zones">
+        <li><span>Internet</span><span class="zone-rule">kein direkter Weg hinein</span></li>
+        <li><span>Edge</span><span class="zone-rule">nimmt öffentlichen Verkehr an</span></li>
+        <li><span>Anwendungen</span><span class="zone-rule">sprechen mit Daten, nicht mit Verwaltung</span></li>
+        <li><span>Daten</span><span class="zone-rule">nur aus den Anwendungen erreichbar</span></li>
+        <li><span>Verwaltung</span><span class="zone-rule">eigener Weg, eigener Schutz</span></li>
+        <li><span>Gast</span><span class="zone-rule">kein Weg zu Daten oder Verwaltung</span></li>
+      </ul>
+
+      <p>Der Grundsatz ist einfach: verboten, was nicht ausdrücklich erlaubt ist. Zwei Befunde
+        aus der Aufnahme zeigen, warum das nötig war — eine doppelt vergebene Adresse und eine
+        Gast-Firewall, die konfiguriert, aber abgeschaltet war. Beides sah in der Oberfläche
+        richtig aus.</p>
+      <p class="note">Der vollständige Zonenplan bleibt intern. Diese Seite nennt keine
+        Adressen und keine Hostnamen.</p>
+    </div>
+  </section>
+
+  <section class="chapter" id="projekte">
+    <div class="chapter-meta">
+      <span class="chapter-no">05</span>
+      <span class="chapter-label">Projekte</span>
+    </div>
+    <div class="chapter-body">
+      <h2>Was darauf gebaut ist</h2>
+      <p>Das Labor ist kein Selbstzweck. Darauf laufen Anwendungen mit echten Nutzern — und
+        Anwendungen, die es noch werden.</p>
+
+      <ul class="projects">
+        <li>
+          <a href="https://bastian-frese.de/#projekte">
+            <span class="proj-name">ERDI's Racing Community</span>
+            <span class="proj-desc">Liga-Plattform mit eigener Server-API, 679 automatisierte Tests, CI/CD bis zum Health-Check.</span>
+            <span class="proj-state">produktiv</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://bastian-frese.de/#projekte">
+            <span class="proj-name">ERCTelemetry</span>
+            <span class="proj-desc">Desktop-Anwendung für Renn-Simulationen: UDP-Telemetrie, SQLite, Stream-Overlays, Auto-Update.</span>
+            <span class="proj-state">private beta</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://bastian-frese.de/#projekte">
+            <span class="proj-name">Telefon-Assistent</span>
+            <span class="proj-desc">Nimmt Anrufe über eine eigene SIP-Leitung an, versteht den Anrufer mit lokaler Spracherkennung und trägt Termine ein.</span>
+            <span class="proj-state">in Betrieb</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://bastian-frese.de/#projekte">
+            <span class="proj-name">Agent-Kalender</span>
+            <span class="proj-desc">Android-App in Kotlin und Compose auf einen selbst gebauten Termin-Dienst, 80 Tests je Variante.</span>
+            <span class="proj-state">im Aufbau</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-main">
+    <p class="footer-claim">Gebaut, betrieben und dokumentiert<br>von Bastian Frese.</p>
+    <p><a href="mailto:bastian@bastian-frese.de">bastian@bastian-frese.de</a><br>
+      <a href="https://bastian-frese.de">bastian-frese.de</a></p>
+  </div>
+  <p class="footer-fine">Diese Seite liegt auf eigener Hardware. Keine Cookies, kein Tracking,
+    keine externen Requests. Schriften werden lokal ausgeliefert.</p>
+</footer>
+
+</body>
+</html>

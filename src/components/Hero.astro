@@ -1,0 +1,55 @@
+---
+const figures = [
+  { value: "3", label: "Knoten" },
+  { value: "40", label: "Gäste im Bestand" },
+  { value: "35", label: "davon in Betrieb" },
+  { value: "0", label: "offene Ports" },
+];
+---
+
+<section id="top" class="border-b border-rule-strong pb-16 pt-[clamp(3.5rem,9vw,7rem)]">
+  <p class="font-mono text-[0.82rem] uppercase tracking-[0.08em] text-muted" data-reveal>
+    Betriebsbuch · Stand 19. Oktober 2026
+  </p>
+
+  <h1
+    class="mt-3 max-w-[12ch] text-[clamp(3.1rem,9vw,7.4rem)] font-semibold leading-[0.94] tracking-[-0.035em]"
+    data-reveal
+  >
+    Ein Labor,<br />das läuft.
+  </h1>
+
+  <p class="mt-10 max-w-[54ch] text-[1.25rem] leading-[1.55] text-muted" data-reveal>
+    Keine Demo und keine Cloud: drei Hypervisor-Knoten im eigenen Regal, vierzig Gäste, ein
+    Netz. Diese Seite beschreibt, was dort läuft, wie es hereinkommt und was passiert, wenn
+    etwas ausfällt.
+  </p>
+
+  <p class="mt-6 max-w-[54ch] text-[0.95rem] leading-[1.6] text-muted" data-reveal>
+    <strong class="font-semibold text-ink">Diese Seite ist das Labor.</strong> Bewerbung,
+    Werdegang und Projekte stehen im
+    <a
+      href="https://bastian-frese.de"
+      class="text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
+      >Portfolio auf bastian-frese.de</a
+    >.
+  </p>
+
+  <dl class="figures mt-16 border-t border-rule pt-3" data-reveal>
+    {
+      figures.map((f) => (
+        <div class="flex flex-col-reverse">
+          <dt class="font-mono text-[0.82rem] text-muted">{f.label}</dt>
+          <dd class="font-mono text-[clamp(2rem,4.4vw,3.2rem)] font-medium leading-[1.1] tracking-[-0.02em] [font-variant-numeric:tabular-nums]">
+            {f.value}
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+
+  <p class="measure mt-3 max-w-[66ch] text-[0.82rem] text-muted" data-reveal>
+    Gezählt am 16.10.2026 über die Cluster-API: 30 Container, 10 virtuelle Maschinen.
+    Maßgeblich ist, was läuft — deshalb 35 und nicht 40.
+  </p>
+</section>

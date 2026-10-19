@@ -1,0 +1,29 @@
+---
+const rows = [
+  {
+    term: "Messen",
+    text: "Grafana, Prometheus und Loki sammeln Metriken und Logs. Alarme gehen über einen eigenen Push-Dienst aufs Handy — ohne fremden Anbieter.",
+  },
+  {
+    term: "Prüfen",
+    text: "Ein eigener Dienst wartet auf Meldungen geplanter Aufgaben. Bleibt eine Meldung aus, ist die Aufgabe nicht gelaufen — auch wenn der Server gesund aussieht.",
+  },
+  {
+    term: "Sichern",
+    text: "Täglich automatisch: Konfiguration aller Systeme und Datenbank-Abzüge, mehrere Stände, an zwei voneinander getrennte Ziele.",
+  },
+];
+---
+
+<dl class="mt-10 grid grid-cols-3 gap-6 max-[700px]:grid-cols-1 max-[700px]:gap-2">
+  {
+    rows.map((r) => (
+      <div class="border-t border-rule-strong pt-3" data-reveal>
+        <dt class="mb-1.5 font-mono text-[0.82rem] uppercase tracking-[0.06em] text-accent">
+          {r.term}
+        </dt>
+        <dd class="text-[0.95rem] leading-[1.6] text-muted">{r.text}</dd>
+      </div>
+    ))
+  }
+</dl>

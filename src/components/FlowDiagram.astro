@@ -1,0 +1,66 @@
+---
+const steps = [
+  ["Browser", "irgendwo im Internet"],
+  ["Cloudflare", "TLS endet hier"],
+  ["Tunnel", "von innen aufgebaut"],
+  ["Proxy", "wählt den Dienst nach Hostname"],
+  ["Router", "Ports 80 und 443 geschlossen"],
+];
+---
+
+<figure class="diagram-frame" data-reveal>
+  <svg viewBox="0 40 760 155" role="img" aria-labelledby="diagram-title diagram-desc">
+    <title id="diagram-title">Der Weg eines Requests von außen in das Labor</title>
+    <desc id="diagram-desc">
+      Vom Browser über Cloudflare und den Tunnel zum Reverse Proxy und von dort zu den
+      Diensten. Der Tunnel wird von innen aufgebaut; am Router ist kein Port offen.
+    </desc>
+
+    <g class="d-box" data-box>
+      <rect x="8" y="62" width="140" height="72" rx="2"></rect>
+      <text x="78" y="94" text-anchor="middle">Browser</text>
+      <text x="78" y="113" text-anchor="middle" class="d-small">irgendwo</text>
+    </g>
+
+    <g class="d-box" data-box>
+      <rect x="196" y="62" width="150" height="72" rx="2"></rect>
+      <text x="271" y="94" text-anchor="middle">Cloudflare</text>
+      <text x="271" y="113" text-anchor="middle" class="d-small">TLS endet hier</text>
+    </g>
+
+    <g class="d-box d-accent" data-box>
+      <rect x="394" y="62" width="150" height="72" rx="2"></rect>
+      <text x="469" y="94" text-anchor="middle">Tunnel</text>
+      <text x="469" y="113" text-anchor="middle" class="d-small">ausgehend aufgebaut</text>
+    </g>
+
+    <g class="d-box" data-box>
+      <rect x="592" y="62" width="160" height="72" rx="2"></rect>
+      <text x="672" y="88" text-anchor="middle">Proxy</text>
+      <text x="672" y="107" text-anchor="middle" class="d-small">wählt den Dienst</text>
+      <text x="672" y="122" text-anchor="middle" class="d-small">nach Hostname</text>
+    </g>
+
+    <path class="d-line" d="M148 98 H192"></path>
+    <path class="d-line" d="M346 98 H390"></path>
+    <path class="d-line" d="M544 98 H588"></path>
+    <path class="d-line" d="M592 160 H672 V138"></path>
+    <text x="672" y="180" text-anchor="middle" class="d-small">Router: 80/443 zu</text>
+  </svg>
+
+  <ol class="flow-alt">
+    {
+      steps.map(([name, detail]) => (
+        <li>
+          <strong>{name}</strong>
+          <span>{detail}</span>
+        </li>
+      ))
+    }
+  </ol>
+
+  <figcaption class="mt-3 max-w-[66ch] text-[0.82rem] text-muted">
+    Ein Request kommt an, ohne dass am Router ein Port geöffnet ist. Der Tunnel hält die
+    Verbindung von innen.
+  </figcaption>
+</figure>

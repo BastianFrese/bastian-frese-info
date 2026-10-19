@@ -1,0 +1,17 @@
+---
+import { zones } from "../data/site";
+---
+
+<ul class="mt-10 border-t border-rule">
+  {
+    zones.map((z) => (
+      <li
+        class="grid grid-cols-[minmax(8rem,12rem)_minmax(0,1fr)] gap-6 border-b border-rule py-[0.7rem] text-[0.95rem] max-[700px]:grid-cols-1 max-[700px]:gap-y-0.5"
+        data-reveal
+      >
+        <span class="font-mono font-medium">{z.name}</span>
+        <span class="text-muted">{z.rule}</span>
+      </li>
+    ))
+  }
+</ul>

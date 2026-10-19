@@ -1,0 +1,20 @@
+---
+import { services } from "../data/site";
+---
+
+<ul class="mt-10">
+  {
+    services.map((s) => (
+      <li
+        class="row-grid border-t border-rule py-[0.85rem] transition-colors duration-150 last:border-b hover:bg-accent-soft"
+        data-reveal
+      >
+        <span class="font-semibold tracking-[-0.01em]">{s.name}</span>
+        <span class="row-long text-[0.95rem] text-muted">{s.role}</span>
+        <span class="whitespace-nowrap font-mono text-[0.82rem] text-accent before:mr-[0.4em] before:text-[0.7em] before:content-['●']">
+          läuft
+        </span>
+      </li>
+    ))
+  }
+</ul>

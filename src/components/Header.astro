@@ -1,0 +1,42 @@
+---
+const sections = [
+  { href: "#betrieb", label: "Betrieb" },
+  { href: "#weg", label: "Weg" },
+  { href: "#wachen", label: "Wachen" },
+  { href: "#netz", label: "Netz" },
+  { href: "#projekte", label: "Projekte" },
+];
+---
+
+<header class="masthead">
+  <div
+    class="mx-auto grid max-w-[1180px] grid-cols-[auto_1fr_auto] items-center gap-6 px-6 py-4 max-[900px]:grid-cols-[1fr_auto] max-[900px]:gap-y-2"
+  >
+    <a href="#top" class="whitespace-nowrap font-mono text-base font-medium no-underline">
+      Bastian Frese <span class="text-muted">/ labor</span>
+    </a>
+
+    <nav
+      aria-label="Abschnitte"
+      class="flex flex-wrap justify-center gap-x-8 gap-y-1 font-mono text-[0.82rem] max-[900px]:col-span-2 max-[900px]:justify-start"
+    >
+      {
+        sections.map((s) => (
+          <a
+            href={s.href}
+            class="border-b border-transparent py-1 text-muted no-underline transition-colors duration-150 hover:border-accent hover:text-ink"
+          >
+            {s.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a
+      href="https://bastian-frese.de"
+      class="whitespace-nowrap font-mono text-[0.82rem] text-accent no-underline underline decoration-accent/40 underline-offset-4 transition-colors duration-150 hover:decoration-accent max-[900px]:text-right"
+    >
+      portfolio &amp; bewerbung <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</header>

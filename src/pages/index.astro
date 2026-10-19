@@ -1,0 +1,100 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Chapter from "../components/Chapter.astro";
+import ServiceList from "../components/ServiceList.astro";
+import FlowDiagram from "../components/FlowDiagram.astro";
+import Ledger from "../components/Ledger.astro";
+import CaseNote from "../components/CaseNote.astro";
+import Zones from "../components/Zones.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout
+  title="Labor — Bastian Frese"
+  description="Ein privat betriebenes Labor: drei Hypervisor-Knoten, vierzig Gäste, ein Netz ohne offene Ports. Betriebsbuch statt Portfolio."
+>
+  <Header />
+
+  <main id="main" class="mx-auto max-w-[1180px] px-6">
+    <Hero />
+
+    <Chapter id="betrieb" no="01" label="Betrieb" title="Was hier läuft">
+      <p class="measure mb-6 text-pretty">
+        Ein flaches Netz, ein Eintrittspunkt, viele Dienste. Die Liste ist keine Sammlung
+        von Installationen, sondern der Bestand, der täglich gebraucht wird.
+      </p>
+      <ServiceList />
+    </Chapter>
+
+    <Chapter id="weg" no="02" label="Weg" title="Der Weg von außen">
+      <p class="measure mb-6 text-pretty">
+        Nichts aus dem Netz ist direkt aus dem Internet erreichbar. Der öffentliche Verkehr
+        kommt über einen Tunnel herein, der von innen aufgebaut wird. Am Router sind die
+        Ports 80 und 443 geschlossen.
+      </p>
+
+      <FlowDiagram />
+
+      <p class="measure max-w-[66ch] border-l-2 border-rule-strong pl-4 text-[0.82rem] text-muted">
+        Die Client-Adresse wird aus <code>CF-Connecting-IP</code> gelesen, nicht aus
+        <code>X-Forwarded-For</code> — der zweite Kopf ist vom Absender frei setzbar und
+        damit für Zugriffsregeln wertlos.
+      </p>
+    </Chapter>
+
+    <Chapter id="wachen" no="03" label="Wachen" title="Was aufpasst">
+      <p class="measure mb-6 text-pretty">
+        Ein Dienst, der läuft, ist noch kein Beweis. Deshalb gibt es drei Ebenen: Messen,
+        Prüfen, Sichern.
+      </p>
+      <Ledger />
+      <CaseNote />
+    </Chapter>
+
+    <Chapter id="netz" no="04" label="Netz" title="Zonen statt Vertrauen">
+      <p class="measure mb-6 text-pretty">
+        Das Netz war vollständig flach: jedes System erreichte jedes andere. Gefunden wurde
+        das nicht durch einen Ausfall, sondern durch das Auslesen der Cluster-Konfiguration.
+        Daraus entstand ein Zonenplan.
+      </p>
+
+      <Zones />
+
+      <p class="measure mb-6 mt-6 text-pretty">
+        Der Grundsatz ist einfach: verboten, was nicht ausdrücklich erlaubt ist. Zwei Befunde
+        aus der Aufnahme zeigen, warum das nötig war — eine doppelt vergebene Adresse und
+        eine Gast-Firewall, die konfiguriert, aber abgeschaltet war. Beides sah in der
+        Oberfläche richtig aus.
+      </p>
+      <p class="measure max-w-[66ch] border-l-2 border-rule-strong pl-4 text-[0.82rem] text-muted">
+        Der vollständige Zonenplan bleibt intern. Diese Seite nennt keine Adressen und keine
+        Hostnamen.
+      </p>
+    </Chapter>
+
+    <Chapter id="projekte" no="05" label="Projekte" title="Was darauf gebaut ist">
+      <p class="measure mb-6 text-pretty">
+        Das Labor ist kein Selbstzweck: Darauf laufen eine Liga-Plattform mit echten Nutzern,
+        eine Desktop-Anwendung für Renn-Simulationen und ein Telefon-Assistent. Die Projekte
+        mit Zahlen, Stand und Quellcode stehen im Portfolio — hier geht es um den Betrieb
+        darunter.
+      </p>
+      <p>
+        <a
+          href="https://bastian-frese.de/#projekte"
+          class="inline-flex items-center gap-2 border-b border-accent pb-1 font-mono text-[0.95rem] text-accent no-underline transition-colors duration-150 hover:border-ink hover:text-ink"
+        >
+          Projekte im Portfolio ansehen <span aria-hidden="true">→</span>
+        </a>
+      </p>
+    </Chapter>
+  </main>
+
+  <Footer />
+
+  <script>
+    import "../scripts/motion";
+  </script>
+</Layout>
