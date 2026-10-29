@@ -9,6 +9,7 @@ import Ledger from "../components/Ledger.astro";
 import CaseNote from "../components/CaseNote.astro";
 import Zones from "../components/Zones.astro";
 import Footer from "../components/Footer.astro";
+import { entries } from "../data/site";
 ---
 
 <Layout
@@ -53,7 +54,55 @@ import Footer from "../components/Footer.astro";
       <CaseNote />
     </Chapter>
 
-    <Chapter id="netz" no="04" label="Netz" title="Zonen statt Vertrauen">
+    <Chapter id="eintraege" no="04" label="Einträge" title="Was gefunden und geändert wurde">
+      <p class="measure mb-6 text-pretty">
+        Ein Betriebsbuch führt, was war — nicht, was gut klingt. Zu jedem Eintrag gehören
+        drei Dinge: was aufgefallen ist, warum es passiert ist, und was seither anders läuft.
+      </p>
+
+      <ol class="mt-10 border-t border-rule-strong">
+        {
+          entries.map((e) => (
+            <li
+              class="grid grid-cols-[8.5rem_minmax(0,1fr)] gap-x-8 border-b border-rule py-7 max-[620px]:grid-cols-1 max-[620px]:gap-y-2"
+              data-reveal
+            >
+              <time
+                datetime={e.datetime}
+                class="font-mono text-[0.82rem] tracking-[0.02em] text-muted max-[620px]:order-first"
+              >
+                {e.date}
+              </time>
+              <div>
+                <h3 class="mb-2 text-[1.15rem] font-semibold leading-[1.35] tracking-[-0.01em]">
+                  {e.title}
+                </h3>
+                <p class="mb-3 max-w-[64ch] text-pretty">{e.issue}</p>
+                <p class="mb-3 max-w-[64ch] text-pretty text-muted">
+                  <span class="font-mono text-[0.75rem] uppercase tracking-[0.06em] text-accent">
+                    Ursache
+                  </span>{" "}
+                  {e.cause}
+                </p>
+                <p class="max-w-[64ch] text-pretty text-muted">
+                  <span class="font-mono text-[0.75rem] uppercase tracking-[0.06em] text-accent">
+                    Seither
+                  </span>{" "}
+                  {e.change}
+                </p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <p class="measure max-w-[66ch] border-l-2 border-rule-strong pl-4 text-[0.82rem] text-muted">
+        Alle Einträge stammen aus dem eigenen Betrieb und sind auf den Tag datiert, an dem
+        der Fehler gefunden wurde. Diese Seite nennt keine Adressen und keine Hostnamen.
+      </p>
+    </Chapter>
+
+    <Chapter id="netz" no="05" label="Netz" title="Zonen statt Vertrauen">
       <p class="measure mb-6 text-pretty">
         Das Netz war vollständig flach: jedes System erreichte jedes andere. Gefunden wurde
         das nicht durch einen Ausfall, sondern durch das Auslesen der Cluster-Konfiguration.
@@ -76,7 +125,7 @@ import Footer from "../components/Footer.astro";
       </p>
     </Chapter>
 
-    <Chapter id="projekte" no="05" label="Projekte" title="Was darauf gebaut ist">
+    <Chapter id="projekte" no="06" label="Projekte" title="Was darauf gebaut ist">
       <p class="measure mb-6 text-pretty">
         Das Labor ist kein Selbstzweck: Darauf laufen eine Liga-Plattform mit echten Nutzern,
         eine Desktop-Anwendung für Renn-Simulationen und ein Telefon-Assistent. Die Projekte

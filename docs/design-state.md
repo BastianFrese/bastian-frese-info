@@ -53,12 +53,39 @@ tabellarisch (Dienste, Zonen, Projekte) und vertragen eine dokumentarische Form.
   Projekte. Beide Seiten verlinken sich gegenseitig.
 - Keine internen IP-Adressen, Hostnamen oder Versionsnummern im öffentlichen Text.
 - Keine erfundenen Zahlen. Belegt sind: 3 Knoten, 40 Gäste, 35 laufend (16.10.2026,
-  `pvesh get /cluster/resources`), 679 Tests (19.10.2026, `dotnet test --list-tests`),
-  80 Tests Agent-Kalender (Chronik 15.10.2026).
+  `pvesh get /cluster/resources`), 731 Tests (29.10.2026, `dotnet test`), 80 Tests
+  Agent-Kalender (Chronik 15.10.2026).
 - Keine Cookies, kein Tracking, keine externen Requests.
 - Status wird als Text benannt, nicht nur als Farbe.
 
+## Kapitel „Einträge" (29.10.2026)
+
+Die Seite hieß seit dem Aufbau „Betriebsbuch", zeigte aber nur einen **Zustand**:
+fünf Kapitel, ein Stand-Datum, keine datierten Vorgänge. Bastian hat das am 29.10.2026
+benannt. Ein Betriebsbuch führt, was gefunden und geändert wurde.
+
+**Neu:** Kapitel `04` mit `id="eintraege"` zwischen „Wachen" und „Netz" (Netz und
+Projekte rücken auf `05`/`06`, nur die angezeigten Nummern — die IDs bleiben stabil,
+damit Links halten). Sieben Einträge, Daten `2026-09-21` bis `2026-10-19`.
+
+- Daten liegen in `src/data/site.ts` als `entries: Entry[]` (Muster wie `zones`),
+  gerendert in `src/pages/index.astro`.
+- Jeder Eintrag hat drei Pflichtfelder: **was war / Ursache / Seither**. Ohne Ursache
+  wäre es eine Erfolgsmeldung; ohne „Seither" eine Anekdote.
+- Datum als `<time datetime="…">` — maschinenlesbar, Anzeige `TT.MM.JJJJ`.
+- Zwei Spalten (8,5 rem Datum + Text), unter 620 px einspaltig. Gemessen bei 485 px:
+  kein Überlauf, kein Link außerhalb des Bildes.
+- Keine Adressen, keine Hostnamen, keine Versionsnummern — auch in den Ursachen nicht.
+  Die Einträge nennen Rollen („ein Knoten", „die Zuordnung"), keine Systeme.
+- **Hell/Dunkel:** die Seite hat zwei Farbsätze über `prefers-color-scheme`. Im
+  dunklen Zweig ist das „Papier" `#101413` und der Akzent `#74d6ac` — die Einträge
+  erben die Tokens, es gibt keine eigenen Farben.
+
+**Stand-Datum** im Hero: `19. Oktober 2026` → **29. Oktober 2026** (es war schon vorher
+ungenau — der Text trug eine Änderung vom 20.10.).
+
 ## Offene Punkte
+
 
 - `www.bastian-frese.info` ist noch nicht eingerichtet (nur der Apex).
 - Ein englischer oder barrierefreier Sprachumschalter ist nicht vorgesehen.
