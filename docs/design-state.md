@@ -84,6 +84,17 @@ damit Links halten). Sieben Einträge, Daten `2026-09-21` bis `2026-10-19`.
 **Stand-Datum** im Hero: `19. Oktober 2026` → **29. Oktober 2026** (es war schon vorher
 ungenau — der Text trug eine Änderung vom 20.10.).
 
+**Achter Eintrag (21.10.2026, PHP2Shell):** zwei kritische Lücken in der PHP-Laufzeit
+(CVE-2026-109618/109619). Im Text **keine Versionsnummern** — nur „die gepatchte
+Fassung"; das ist ohnehin die Regel dieser Seite.
+
+**Kopf und Sprungmarken (29.10.):** Der sechste Navigationspunkt ließ „Projekte" auf eine
+eigene Zeile rutschen (Kopf 160 px), und Sprungmarken landeten **unter** dem sticky Kopf,
+weil `scroll-padding-top` nirgends gesetzt war. Beides behoben: Navigation unter 900 px
+`flex-nowrap` mit `gap-x-5` (sechs Punkte in einer Zeile, Kopf 129 px), `scroll-padding-top`
+5,5 rem bzw. 8,5 rem unter 900 px. Gemessen bei 485 px: kein Überlauf, nach dem Sprung auf
+`#eintraege` steht die Überschrift bei 238 px und der Kopf endet bei 129 px.
+
 ## Offene Punkte
 
 
