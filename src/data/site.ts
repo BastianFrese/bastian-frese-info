@@ -110,6 +110,17 @@ export const entries: Entry[] = [
     change:
       "Die Projektzahlen stehen nur im Portfolio auf bastian-frese.de. Hier steht der Betrieb darunter — und wenn eine Zahl sich ändert, ändert sie sich an genau einer Stelle.",
   },
+  {
+    date: "21.10.2026",
+    datetime: "2026-10-21",
+    title: "Zwei kritische Lücken in PHP",
+    issue:
+      "Veröffentlicht wurden zwei Schwachstellen in der Sprache, auf der fast jede Webanwendung läuft: aus der Ferne ausnutzbar, ohne Anmeldung, Bewertung 9,2 von 10. Betroffen waren praktisch alle Fassungen der letzten zehn Jahre. Vier Tage später standen beide auf der Liste der Lücken, die nachweislich ausgenutzt werden.",
+    cause:
+      "Betroffen war nicht eine Anwendung, sondern die Schicht darunter. Ein Update der Anwendung hätte hier nichts geholfen — es ging um die Laufzeit selbst.",
+    change:
+      "Die Laufzeit wurde auf die gepatchte Fassung gehoben und danach geprüft, dass die Anwendung weiter antwortet. Seither gilt für diese Schicht dieselbe Regel wie für die Sicherung: nicht „der Dienst läuft“ ist der Beweis, sondern „die Fassung ist die richtige“.",
+  },
 ];
 
 

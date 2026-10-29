@@ -77,6 +77,17 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    /* Der Kopf ist sticky. Ohne diesen Abstand landet eine Sprungmarke
+       unter der Leiste statt an der Überschrift. */
+    scroll-padding-top: 5.5rem;
+  }
+
+  /* Auf schmalen Bildschirmen steht die Navigation in einer eigenen Zeile
+     und der Kopf wird höher. */
+  @media (max-width: 900px) {
+    html {
+      scroll-padding-top: 8.5rem;
+    }
   }
 
   body {

@@ -19,13 +19,13 @@ const sections = [
 
     <nav
       aria-label="Abschnitte"
-      class="flex flex-wrap justify-center gap-x-8 gap-y-1 font-mono text-[0.82rem] max-[900px]:col-span-2 max-[900px]:justify-start"
+      class="flex flex-wrap justify-center gap-x-8 gap-y-1 font-mono text-[0.82rem] max-[900px]:col-span-2 max-[900px]:justify-start max-[900px]:flex-nowrap max-[900px]:overflow-x-auto max-[900px]:gap-x-5 max-[900px]:pb-1"
     >
       {
         sections.map((s) => (
           <a
             href={s.href}
-            class="border-b border-transparent py-1 text-muted no-underline transition-colors duration-150 hover:border-accent hover:text-ink"
+            class="whitespace-nowrap border-b border-transparent py-1 text-muted no-underline transition-colors duration-150 hover:border-accent hover:text-ink"
           >
             {s.label}
           </a>
