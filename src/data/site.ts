@@ -121,6 +121,17 @@ export const entries: Entry[] = [
     change:
       "Die Laufzeit wurde auf die gepatchte Fassung gehoben und danach geprüft, dass die Anwendung weiter antwortet. Seither gilt für diese Schicht dieselbe Regel wie für die Sicherung: nicht „der Dienst läuft“ ist der Beweis, sondern „die Fassung ist die richtige“.",
   },
+  {
+    date: "30.10.2026",
+    datetime: "2026-10-30",
+    title: "Das Gedächtnis bekommt ein Fenster",
+    issue:
+      "Der Betrieb des eigenen Netzes lebt in einem Ordner voller Textdateien — gepflegt von einem KI-Agenten, geprüft mit Skripten. Sichtbar war das nur dem Agenten: jede Suche über das Terminal, jede Änderung hinter der Oberfläche eines fremden Notizprogramms. Ein Zustand, dem man ansieht, dass er existiert, aber nicht, dass er lebt.",
+    cause:
+      "Der Ordner ist die richtige Wahl: kein Format, das abgekündigt wird, kein Konto, das abläuft, keine Datenbank, die man mitpflegen muss. Was fehlte, war das Gesicht, das mitzieht, sobald eine Zeile entsteht.",
+    change:
+      "Ein eigenes Fenster liest den Ordner live, baut Knoten und Kanten aus den Verweisen und zeigt Notizen, Tags und Suche in der Oberfläche, die dafür entworfen wurde — unverändert bis auf eine Stelle, an der echtes Daten-Ersatz steht. Der Quellcode ist öffentlich, das Fenster startet mit dem Rechner.",
+  },
 ];
 
 
